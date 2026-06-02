@@ -39391,7 +39391,6 @@ var GLOBAL_LEADERBOARD_API = null;
 
                 const rank_div = document.createElement('div');
                 rank_div.className = 'rank-badge-container';
-                h.appendChild(rank_div);
 
                 C.get(this, timeAnnouncerUIDiv, "f").appendChild(h);
 
@@ -39459,6 +39458,7 @@ var GLOBAL_LEADERBOARD_API = null;
                         const svg = m_makeRankBadge(rank);
 
                         const r = Math.max(0, 1500 - (performance.now() - b));
+                        h.appendChild(rank_div);
                         setTimeout(( () => {
                             rank_div.appendChild(m_makeRankBadge(rank));
                             rank_div.classList.add("show");
