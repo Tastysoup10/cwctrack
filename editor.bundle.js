@@ -1123,7 +1123,7 @@
             }
             return n
         }
-        var Ft, editor_audioManager, editor_lastEditSoundTime, editor_localization, editor_renderer, editor_transitionManager, editor_track, editor_partRegistry, editor_trackStorage, editor_customTrackManager, editor_networkManager, editor_userProfileManager, editor_dialogManager, editor_inputManager, editor_settingsManager, editor_testCallback, editor_isActive, editor_containerElement, editor_topBar, editor_toastElement, editor_toastTimeout, editor_pasteButton, editor_undoButton, editor_redoButton, editor_partPanelContainer, editor_categoryBar, editor_heightSelectorUI, editor_checkpointOrderUI, editor_exportUI, editor_loadingScreen, editor_helpUI, editor_sideToolbar, editor_trackSettingsUI, editor_activeModal, editor_settingsButton, editor_onMouseMove, editor_onMouseDown, editor_onMouseUp, editor_onMouseOut, editor_onTouchStart, editor_onClick, editor_onKeyDown, editor_onKeyUp, editor_onWheel, editor_onBeforeUnload, editor_cameraRig, editor_orbitControls, editor_isHeightModifierHeld, editor_keyForward, editor_keyRight, editor_keyBackward, editor_keyLeft, editor_keyPitchUp, editor_keyPitchDown, editor_keyYawLeft, editor_keyYawRight, editor_isSaved, editor_raycaster, editor_gridPlane, editor_previewGroup, editor_ghostMaterial, editor_previewMeshes, editor_tileIndicatorMaterial, editor_tileIndicatorGeometry, editor_tileIndicatorMesh, editor_isDeleteKeyHeld, editor_isLeftMouseDown, editor_mouseNDC, editor_lastTouchTimestamp, editor_isTapPending, editor_cursorGridPos, editor_minYOffset, editor_currentRotation, editor_currentAxis, editor_isLargeGrid, editor_isDeleteMode, editor_lastPlacement, editor_lastDeletion, editor_trackName, editor_trackAuthor, editor_lastModified, editor_undoStack, editor_redoStack, editor_checkpointLabels3D, editor_partEntries, editor_selectedPartIndex, editor_selectedColor, editor_isCopyMode, editor_isCutMode, editor_selectionStart, editor_clipboard, editor_activePlacement, editor_selectionBoxMeshes, editor_lastOverlapCheckPos, editor_categoryEntries, editor_selectedCategory, editor_isTyping, updateSelectionBoxVisual, copyOrCutRegion, activatePaste, placeActiveParts, loadTrackMetadata, setTrackName, setTrackAuthor, setTrackCreationDate, confirmExit, testTrack, pickPartUnderCursor, undo, redo, showToast, initPartPalette, getEffectiveColor, setEnvironment, refreshAllThumbnails, rebuildPreviewMesh, selectCategory, selectPart, getCurrentHeight, setHeight, recalcMinYOffset, refreshTrackAfterEdit, playEditSound, getCursorGridPosition, findOverlappingParts, hasOverlappingParts, deletePartsAndRecord, updateKeyboardCamera, isKeyboardInputActive, TrackLoadError = n(6223).A, LoadingScreenUI = n(5302).A;
+        var Ft, editor_audioManager, editor_lastEditSoundTime, editor_localization, editor_renderer, editor_transitionManager, editor_track, editor_partRegistry, editor_trackStorage, editor_customTrackManager, editor_networkManager, editor_userProfileManager, editor_dialogManager, editor_inputManager, editor_settingsManager, editor_testCallback, editor_isActive, editor_containerElement, editor_topBar, editor_toastElement, editor_toastTimeout, editor_pasteButton, editor_savePrefabButton, editor_undoButton, editor_redoButton, editor_partPanelContainer, editor_categoryBar, editor_prefabPanel, editor_heightSelectorUI, editor_checkpointOrderUI, editor_exportUI, editor_loadingScreen, editor_helpUI, editor_sideToolbar, editor_trackSettingsUI, editor_activeModal, editor_settingsButton, editor_onMouseMove, editor_onMouseDown, editor_onMouseUp, editor_onMouseOut, editor_onTouchStart, editor_onClick, editor_onKeyDown, editor_onKeyUp, editor_onWheel, editor_onBeforeUnload, editor_cameraRig, editor_orbitControls, editor_isHeightModifierHeld, editor_keyForward, editor_keyRight, editor_keyBackward, editor_keyLeft, editor_keyPitchUp, editor_keyPitchDown, editor_keyYawLeft, editor_keyYawRight, editor_isSaved, editor_raycaster, editor_gridPlane, editor_previewGroup, editor_ghostMaterial, editor_previewMeshes, editor_tileIndicatorMaterial, editor_tileIndicatorGeometry, editor_tileIndicatorMesh, editor_isDeleteKeyHeld, editor_isLeftMouseDown, editor_mouseNDC, editor_lastTouchTimestamp, editor_isTapPending, editor_cursorGridPos, editor_minYOffset, editor_currentRotation, editor_currentAxis, editor_isLargeGrid, editor_isDeleteMode, editor_lastPlacement, editor_lastDeletion, editor_trackName, editor_trackAuthor, editor_lastModified, editor_undoStack, editor_redoStack, editor_checkpointLabels3D, editor_partEntries, editor_selectedPartIndex, editor_selectedColor, editor_isCopyMode, editor_isCutMode, editor_selectionStart, editor_clipboard, editor_activePlacement, editor_selectionBoxMeshes, editor_lastOverlapCheckPos, editor_categoryEntries, editor_selectedCategory, editor_isTyping, updateSelectionBoxVisual, copyOrCutRegion, activatePaste, placeActiveParts, loadTrackMetadata, setTrackName, setTrackAuthor, setTrackCreationDate, confirmExit, testTrack, pickPartUnderCursor, undo, redo, showToast, initPartPalette, getEffectiveColor, setEnvironment, refreshAllThumbnails, refreshPrefabPanel, renderPrefabThumbnail, rebuildPreviewMesh, selectCategory, selectPart, getCurrentHeight, setHeight, recalcMinYOffset, refreshTrackAfterEdit, playEditSound, getCursorGridPosition, findOverlappingParts, hasOverlappingParts, deletePartsAndRecord, updateKeyboardCamera, isKeyboardInputActive, TrackLoadError = n(6223).A, LoadingScreenUI = n(5302).A;
         editor_audioManager = new WeakMap,
         editor_lastEditSoundTime = new WeakMap,
         editor_localization = new WeakMap,
@@ -1145,10 +1145,12 @@
         editor_toastElement = new WeakMap,
         editor_toastTimeout = new WeakMap,
         editor_pasteButton = new WeakMap,
+        editor_savePrefabButton = new WeakMap,
         editor_undoButton = new WeakMap,
         editor_redoButton = new WeakMap,
         editor_partPanelContainer = new WeakMap,
         editor_categoryBar = new WeakMap,
+        editor_prefabPanel = new WeakMap,
         editor_heightSelectorUI = new WeakMap,
         editor_checkpointOrderUI = new WeakMap,
         editor_exportUI = new WeakMap,
@@ -1353,6 +1355,7 @@
                 tiles: k
             }, "f"),
             get(this, editor_pasteButton, "f").disabled = !1,
+            get(this, editor_savePrefabButton, "f").disabled = !1,
             get(this, Ft, "m", activatePaste).call(this)
         }
         ,
@@ -1679,6 +1682,8 @@
         ,
         refreshAllThumbnails = function() {
             for (const t of get(this, editor_categoryEntries, "f")) {
+                if ("prefabs" == t.category)
+                    continue;
                 const e = get(this, editor_partRegistry, "f").getCategoryMesh(t.category, get(this, editor_track, "f").environment);
                 t.image.removeAttribute("src"),
                 t.image.className = "loading",
@@ -1715,6 +1720,122 @@
                     } else
                         e.image.removeAttribute("src"),
                         e.image.className = "loading"
+        }
+        ,
+        refreshPrefabPanel = function() {
+            const panel = get(this, editor_prefabPanel, "f");
+            panel.innerHTML = "";
+            const prefabs = PrefabManager.load();
+            let dragIndex = null;
+            const addDropTarget = (element, onDrop, confirmDelete) => {
+                element.addEventListener("dragover", (t => t.preventDefault())),
+                element.addEventListener("drop", (t => {
+                    t.preventDefault();
+                    let e = dragIndex;
+                    if (dragIndex = null,
+                    null == e && (e = parseInt(t.dataTransfer.getData("application/x-prefab-index")),
+                    Number.isNaN(e)))
+                        return;
+                    const commit = () => {
+                        const n = PrefabManager.load();
+                        if (e < 0 || e >= n.length || !prefabs.every(( (s, o) => n[o]?.thumbnail == s.thumbnail)))
+                            return void get(this, Ft, "m", refreshPrefabPanel).call(this);
+                        onDrop(e, n);
+                        try {
+                            PrefabManager.saveAll(n)
+                        } catch {
+                            get(this, Ft, "m", showToast).call(this, get(this, editor_localization, "f").get("Failed to save prefab"), !1)
+                        }
+                        get(this, editor_audioManager, "f").playUIClick(),
+                        get(this, Ft, "m", refreshPrefabPanel).call(this)
+                    };
+                    confirmDelete && !t.shiftKey ? (get(this, editor_containerElement, "f").inert = !0,
+                    get(this, editor_dialogManager, "f").showConfirm(get(this, editor_localization, "f").get("Are you sure you want to delete this prefab?"), get(this, editor_localization, "f").get("Cancel"), get(this, editor_localization, "f").get("Delete"), ( () => {
+                        get(this, editor_containerElement, "f").inert = !1
+                    }
+                    ), ( () => {
+                        get(this, editor_containerElement, "f").inert = !1,
+                        commit()
+                    }
+                    ))) : commit()
+                }
+                ))
+            }
+              , trashButton = document.createElement("button");
+            trashButton.innerHTML = '<img src="images/delete.svg" draggable="false">',
+            addDropTarget(trashButton, ( (s, o) => o.splice(s, 1)), !0),
+            panel.appendChild(trashButton);
+            for (let i = 0; i < prefabs.length; i++) {
+                const t = prefabs[i]
+                  , e = document.createElement("button");
+                e.draggable = !0,
+                e.addEventListener("dragstart", (t => {
+                    dragIndex = i,
+                    t.dataTransfer.setData("application/x-prefab-index", String(i))
+                }
+                )),
+                e.addEventListener("dragend", ( () => dragIndex = null)),
+                addDropTarget(e, ( (s, o) => {
+                    s != i && o.splice(i, 0, o.splice(s, 1)[0])
+                }
+                )),
+                e.addEventListener("click", ( () => {
+                    get(this, editor_audioManager, "f").playUIClick();
+                    try {
+                        set(this, editor_clipboard, {
+                            parts: t.parts,
+                            tiles: new dt.A(t.tiles)
+                        }, "f"),
+                        get(this, editor_pasteButton, "f").disabled = !1,
+                        get(this, editor_savePrefabButton, "f").disabled = !1,
+                        get(this, Ft, "m", activatePaste).call(this)
+                    } catch {
+                        set(this, editor_clipboard, null, "f"),
+                        set(this, editor_activePlacement, null, "f"),
+                        get(this, editor_pasteButton, "f").disabled = !0,
+                        get(this, editor_savePrefabButton, "f").disabled = !0,
+                        get(this, Ft, "m", rebuildPreviewMesh).call(this),
+                        get(this, Ft, "m", showToast).call(this, get(this, editor_localization, "f").get("Failed to load prefab"), !1)
+                    }
+                }
+                )),
+                panel.appendChild(e);
+                const n = document.createElement("img");
+                n.draggable = !1,
+                n.src = t.thumbnail,
+                e.appendChild(n)
+            }
+        }
+        ,
+        renderPrefabThumbnail = function(t) {
+            let e;
+            switch (get(this, editor_track, "f").environment) {
+            case TrackEnvironment.Summer:
+                e = TrackPartColorId.Summer;
+                break;
+            case TrackEnvironment.Winter:
+                e = TrackPartColorId.Winter;
+                break;
+            case TrackEnvironment.Desert:
+                e = TrackPartColorId.Desert
+            }
+            const n = new THREE.Group;
+            for (const s of t) {
+                const t = get(this, editor_partRegistry, "f").getPart(s.id).colors
+                  , o = t.get(s.color != TrackPartColorId.Default && t.has(s.color) ? s.color : e);
+                if (null == o)
+                    throw new Error("Track part mesh has not loaded yet");
+                const a = o.clone();
+                a.quaternion.copy(TrackPartTransform.rotationAndAxisToQuaternion(s.rotation, s.rotationAxis)),
+                a.position.set(s.offset.x * Track.A.partSize, s.offset.y * Track.A.partSize, s.offset.z * Track.A.partSize),
+                n.add(a)
+            }
+            const s = (new THREE.Box3).setFromObject(n).getBoundingSphere(new THREE.Sphere);
+            return n.geometry = {
+                computeBoundingSphere: () => {},
+                boundingSphere: s
+            },
+            renderPartThumbnail(n)
         }
         ,
         rebuildPreviewMesh = function() {
@@ -1804,6 +1925,12 @@
                     e.category == t ? (e.button.classList.add("selected"),
                     e.partPanel.classList.remove("hidden")) : (e.button.classList.remove("selected"),
                     e.partPanel.classList.add("hidden"));
+                if ("prefabs" == t)
+                    return set(this, editor_isCopyMode, !1, "f"),
+                    set(this, editor_isCutMode, !1, "f"),
+                    set(this, editor_selectionStart, null, "f"),
+                    set(this, editor_activePlacement, null, "f"),
+                    void get(this, Ft, "m", selectPart).call(this, null);
                 if (null == t)
                     get(this, Ft, "m", selectPart).call(this, 0);
                 else {
@@ -2081,10 +2208,12 @@
                 editor_toastElement.set(this, void 0),
                 editor_toastTimeout.set(this, null),
                 editor_pasteButton.set(this, void 0),
+                editor_savePrefabButton.set(this, void 0),
                 editor_undoButton.set(this, void 0),
                 editor_redoButton.set(this, void 0),
                 editor_partPanelContainer.set(this, void 0),
                 editor_categoryBar.set(this, void 0),
+                editor_prefabPanel.set(this, void 0),
                 editor_heightSelectorUI.set(this, void 0),
                 editor_checkpointOrderUI.set(this, void 0),
                 editor_exportUI.set(this, void 0),
@@ -3093,7 +3222,38 @@
                     get(this, Ft, "m", selectPart).call(this, null)
                 }
                 )),
-                N.appendChild(get(this, editor_pasteButton, "f"));
+                N.appendChild(get(this, editor_pasteButton, "f")),
+                set(this, editor_savePrefabButton, document.createElement("button"), "f"),
+                get(this, editor_savePrefabButton, "f").className = "button",
+                get(this, editor_savePrefabButton, "f").disabled = !0,
+                get(this, editor_savePrefabButton, "f").innerHTML = '<img class="button-icon" src="images/save.svg">',
+                get(this, editor_savePrefabButton, "f").addEventListener("click", ( () => {
+                    const t = get(this, editor_clipboard, "f");
+                    if (null == t)
+                        return;
+                    get(this, editor_audioManager, "f").playUIClick(),
+                    get(this, editor_savePrefabButton, "f").disabled = !0;
+                    const e = [];
+                    t.tiles.forEach(( (t, n, s) => e.push([t, n, s]))),
+                    get(this, Ft, "m", renderPrefabThumbnail).call(this, t.parts).then((n => {
+                        PrefabManager.save({
+                            parts: t.parts,
+                            tiles: e,
+                            thumbnail: n
+                        }),
+                        get(this, Ft, "m", refreshPrefabPanel).call(this),
+                        get(this, Ft, "m", showToast).call(this, get(this, editor_localization, "f").get("Prefab saved"), !0)
+                    }
+                    )).catch(( () => {
+                        get(this, Ft, "m", showToast).call(this, get(this, editor_localization, "f").get("Failed to save prefab"), !1)
+                    }
+                    )).finally(( () => {
+                        get(this, editor_savePrefabButton, "f").disabled = null == get(this, editor_clipboard, "f")
+                    }
+                    ))
+                }
+                )),
+                N.appendChild(get(this, editor_savePrefabButton, "f"));
                 const q = document.createElement("div");
                 q.className = "undo-container",
                 N.appendChild(q),
@@ -3145,7 +3305,28 @@
                     isCheckpoint: !1,
                     isStart: !1,
                     category: null
+                });
+                const prefabCategoryButton = document.createElement("button");
+                prefabCategoryButton.addEventListener("click", ( () => {
+                    get(this, editor_audioManager, "f").playUIClick(),
+                    get(this, Ft, "m", selectCategory).call(this, "prefabs")
+                }
+                )),
+                get(this, editor_categoryBar, "f").appendChild(prefabCategoryButton);
+                const prefabCategoryImage = document.createElement("img");
+                prefabCategoryImage.src = "images/save.svg",
+                prefabCategoryButton.appendChild(prefabCategoryImage),
+                set(this, editor_prefabPanel, document.createElement("div"), "f"),
+                get(this, editor_prefabPanel, "f").className = "part-panel hidden",
+                get(this, editor_partPanelContainer, "f").prepend(get(this, editor_prefabPanel, "f")),
+                get(this, editor_categoryEntries, "f").push({
+                    category: "prefabs",
+                    button: prefabCategoryButton,
+                    image: prefabCategoryImage,
+                    partPanel: get(this, editor_prefabPanel, "f"),
+                    selectedIndex: null
                 }),
+                get(this, Ft, "m", refreshPrefabPanel).call(this),
                 set(this, editor_heightSelectorUI, new HeightSelectorUI(get(this, editor_containerElement, "f"),get(this, editor_localization, "f"),get(this, editor_inputManager, "f"),( () => {
                     get(this, editor_audioManager, "f").playUIClick(),
                     set(this, Ft, get(this, Ft, "a", getCurrentHeight) + 1, "a", setHeight)
