@@ -1,1 +1,1 @@
-const POLYTRACK_API_REQUEST_URL = "https://ptproxy.cwcinc.dev/"; // "https://vps.kodub.com/"
+const POLYTRACK_API_REQUEST_URL = "https://polytrack-leaderboard.minceraft-player-2010.workers.dev/"; // "https://vps.kodub.com/"
